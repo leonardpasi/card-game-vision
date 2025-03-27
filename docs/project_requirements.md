@@ -4,7 +4,7 @@
 The game uses a standard 52 card deck which is composed of four French suits/colours: clubs (&#9827;), diamonds (&#9830;), hearts (&#9829;) and spades (&#9824;). Each suit includes 10 MNIST digit cards (from 0 to 9) and 3 figures (Jack-J, Queen-Q, and King-K). Here is an example of the 13 spade cards with their name.
 
 
-<img src="media/example_cards.png">
+<img src="../media/example_cards.png">
 
 
 We can find the same arrangement of cards for the clubs, diamonds, and hearts. 
@@ -35,7 +35,7 @@ The advanced rules take into account the suits.
 - We use the same system as the standard method to count the points.
 
 
-<img src="media/example_round.jpg">
+<img src="../media/example_round.jpg">
 
 
 ### 1.3 Notes
