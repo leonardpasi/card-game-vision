@@ -1,10 +1,13 @@
 # card-game-vision
 
-## Overview
----
-## 0. Introduction
+This work was completed in **2021** as a graded project for the EPFL Image Analysis and Pattern Recognition course, taught by Prof. Jean-Philippe Thiran. The final grade was **6/6**.
 
-An anonymous researcher that we will name Lann Yecun is convinced that the MNIST dataset still has great potential. He decides to create a playing card game based on MNIST digits and different figures. The game uses a standard 52 card deck which is composed of four French suits/colours: clubs (&#9827;), diamonds (&#9830;), hearts (&#9829;) and spades (&#9824;). Each suit includes 10 digit cards (from 0 to 9) and 3 figures (Jack-J, Queen-Q, and King-K). Here is an example of the 13 spade cards with their name.
+In short, the goal is to predict the outcome of a new unseen card game, given noisy pictures of the rounds of several card games (with handwritten digits) as a training set. A detailed description of the requirements follows below. 
+
+## Project description and requirements
+
+### 0. Introduction
+The game uses a standard 52 card deck which is composed of four French suits/colours: clubs (&#9827;), diamonds (&#9830;), hearts (&#9829;) and spades (&#9824;). Each suit includes 10 MNIST digit cards (from 0 to 9) and 3 figures (Jack-J, Queen-Q, and King-K). Here is an example of the 13 spade cards with their name.
 
 
 <img src="media/example_cards.png">
@@ -13,9 +16,9 @@ An anonymous researcher that we will name Lann Yecun is convinced that the MNIST
 We can find the same arrangement of cards for the clubs, diamonds, and hearts. 
 
 
-## 1. Rules
+### 1. Rules
 
-### 1.1 Standard
+#### 1.1 Standard
 
 The rules are based on the simple battle card game. The goal of the game is to win as many points as possible. Each turn, the 4 players play a card in front of them. As displayed in the example below. The rules are the following:
 
@@ -28,7 +31,7 @@ The rules are based on the simple battle card game. The goal of the game is to w
 
 If two or more players have the same number of points they share the victory.
 
-### 1.2 Advanced
+#### 1.2 Advanced
 
 The advanced rules take into account the suits. 
 
@@ -41,7 +44,7 @@ The advanced rules take into account the suits.
 <img src="media/example_round.jpg">
 
 
-### 1.3 Notes
+#### 1.3 Notes
 
 - The orientation of the card is linked to the position of the player around the table. For instance, to read the card of the 3rd player you will have to rotate it by 180°.
 - The **digits** always **face** the players around the table. The figures can have random orientations.
@@ -51,19 +54,18 @@ The advanced rules take into account the suits.
 - Pictures are always taken from rougthly the same altitude.
 - The digits from the training set **would not** be the same as the one of the testing set.
 
----
-## 2. Data
+### 2. Data
 
-You will be given the images of 7 games that were played ([download link](https://drive.google.com/drive/folders/1fEy27wnJsUJPRsEEomzoAtP56s-7HFtk?usp=sharing)). The data are composed of:
+The images of 7 games that were played are given at `train_games`. The data are composed of:
    - 7 folder named after the games (game1 to game7).
    - Each game includes 13 ordered images (1st to 13th round).
    - Each game includes a csv file with the ground truth of the game. The first row list the players (P1 to P4) as well as the dealer (D). The following rows represent the rounds (1 to 13). We represent the card played with 2 character as $AB$ where $A \in [0-9, J, Q, K]$ is the rank of the card and $B \in [C, D, H, S]$ is the suit. For example, QS means "(Q)ueen of (S)pade" and 0D means "(0) of (D)iamond". The dealer is represented by the ID of the player (e.g. P1 -> 1).
    
-You are free to use external datasets such as the original MNIST train set that you used in lab 3.
+Freedom is given to use external datasets like MNIST.
 
-## 3. Your Tasks
+### 3. Tasks
 
-Your task is to ready yourself for the final evaluation. The day of the exam we will give you a new folder with a new game. ! The digits on the cards **differ** from the one of the traning set. When given a new data folder with 13 images your should be able to:
+The task is to ready yourself for the final evaluation. The day of the exam we will give you a new folder with a new game. ! The digits on the cards **differ** from the one of the traning set. When given a new data folder with 13 images your should be able to:
 
 **Task 0**
    - Plot an overlay for each round image that shows your detections and classification. You can for example plot bounding boxes around the cards/dealer token and add a text overlay with the name of the classes.
@@ -77,4 +79,4 @@ Your task is to ready yourself for the final evaluation. The day of the exam we 
    - (b) Predict the **rank** and the **suit** of the card played by each player at each round (Advanced rules).
    - (c) Predict the **number of points** of each player according to **Advanced** rules
 
----
+
