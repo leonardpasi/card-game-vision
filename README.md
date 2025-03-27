@@ -1,1 +1,3 @@
-# card_game_vision
+# card-game-vision
+
+## Overview
