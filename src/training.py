@@ -36,18 +36,27 @@ module. To summarize our approach:
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from keras.layers import TFSMLayer
-from functions import *
+from functions import (
+    HDClassifier,
+    SCClassifier,
+    fourier_feature_extraction,
+    df_NN_prediction,
+    DF_Classifier,
+    SuitsClassifier,
+)
 import os
 
+# %%
 
-os.environ["KMP_DUPLICATE_LIB_OK"] = "True"  # I need to do it on my laptop
-# otherwise tensorflow will crash
+ILLUSTRATE = False
 
-ILLUSTRATE = True
+repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+training_segmented_path = os.path.join(
+    repo_root, "data", "train", "generated_sample.npz"
+)
 
 # Loading output from segmentation module
-data = np.load("generated_sample.npz")
+data = np.load(training_segmented_path)
 
 digits_lbl = data["test_data_digits.npy"]
 digits_pic = data["train_data_digits.npy"]
@@ -59,14 +68,18 @@ suits_pic = np.delete(suits_pic, [106, 184, 185, 214, 274], axis=0)
 suits_lbl = np.delete(suits_lbl, [106, 184, 185, 214, 274])  # corrections
 
 
-model_D = TFSMLayer(
-    "NN/model_9527", call_endpoint="serving_default"
-)  # Loading trained Neural Networks
-# model_S = tf.keras.models.load_model("NN/modelS")
+# Loading trained Neural Networks
+model_D = tf.keras.models.load_model(
+    os.path.join(repo_root, "trained_models", "model_9527")
+)
+model_S = tf.keras.models.load_model(
+    os.path.join(repo_root, "trained_models", "modelS")
+)
 
 if ILLUSTRATE:
-    pass
-    # model_FD = tf.keras.models.load_model("NN/modelFD")
+    model_FD = tf.keras.models.load_model(
+        os.path.join(repo_root, "trained_models", "modelFD")
+    )
 
 
 # %%
@@ -99,7 +112,7 @@ if ILLUSTRATE:
 ### SECOND IDEA: do data augmentation on the extracted figures, and train a
 ### neural network
 
-# suits_classifier = SuitsClassifier(model_S)
+suits_classifier = SuitsClassifier(model_S)
 
 # %%
 
@@ -151,28 +164,25 @@ if ILLUSTRATE:
 
 # %% To identify outliers
 
-# descriptors = fourier_feature_extraction(suits_pic, [2])
-# I = []
-# for i in range(358):
-#     if suits_lbl[i] == 'H' and descriptors[i] < 500:
-#         I.append(i)
+descriptors = fourier_feature_extraction(suits_pic, [2])
+I = []
+for i in range(358):
+    if suits_lbl[i] == "H" and descriptors[i] < 500:
+        I.append(i)
 
-# print(I)
+print(I)
 
 # %% ### SECOND IDEA: using Neural Network for both digits and figures
 
 if ILLUSTRATE:
-    pass
     # Testing our trained neural network on the digits
-    # pred = df_NN_prediction(digits_only_pic, model_FD, Figures=True)
+    pred = df_NN_prediction(digits_only_pic, model_FD, Figures=True)
 
-    # print(
-    #    "\nUsing an NN trained on both the MNIST and the augumented set of figures\
-    # from the training games, the error rate on the digits from the training games\
-    # is: {:.2f}".format(
-    #        (pred == digits_only_lbl).mean() * 100
-    #    )
-    # )
+    print(
+        "\nUsing an NN trained on both the MNIST and the augmented set of figures "
+        "from the training games, the error rate on the digits from the training games "
+        "is: {:.2f}".format((pred == digits_only_lbl).mean() * 100)
+    )
 
     ## Very bad performance!! Even though the performance on the figures is
     ## excellent, as well as that for the MNIST testing set (100% and 95.56%
@@ -182,4 +192,4 @@ if ILLUSTRATE:
 # %%  ### THIRD IDEA: combine a Neural Network trained on MNIST with Fourier
 ### descriptors to identify figures
 
-# digit_fig_classifier = DF_Classifier(digits_pic, digits_lbl, model_D)
+digit_fig_classifier = DF_Classifier(digits_pic, digits_lbl, model_D)
