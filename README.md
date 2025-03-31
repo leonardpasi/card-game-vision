@@ -1,11 +1,9 @@
 # card-game-vision
 
-🚧 Work in Progress : this project is in the process of being "revived"
-
 
 ## Overview
 
-This work was completed in **2021** as a graded project for the EPFL Image Analysis and Pattern Recognition course, taught by Prof. Jean-Philippe Thiran. The final grade was **5.75/6**.
+This repo contains a "revived" version of a **2021** graded project for the EPFL Image Analysis and Pattern Recognition course, taught by Prof. Jean-Philippe Thiran. The final grade was **5.75/6**.
 
 In short, the goal is to predict the outcome of a new unseen card game, given noisy pictures of the rounds of several card games (with handwritten digits) as a training set. One such picture is displayed below. A detailed description of the project and its requirements is given at `\docs\project_requirements.md`
 
