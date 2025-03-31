@@ -1,2 +1,5 @@
 __pycache__/
 venv/
+
+# Too heavy to push to GitHub
+generated_sample.npz
