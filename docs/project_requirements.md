@@ -4,7 +4,7 @@
 The game uses a standard 52 card deck which is composed of four French suits/colours: clubs (&#9827;), diamonds (&#9830;), hearts (&#9829;) and spades (&#9824;). Each suit includes 10 MNIST digit cards (from 0 to 9) and 3 figures (Jack-J, Queen-Q, and King-K). Here is an example of the 13 spade cards with their name.
 
 
-<img src="../media/example_cards.png">
+<img src="../docs/media/example_cards.png">
 
 
 We can find the same arrangement of cards for the clubs, diamonds, and hearts. 
@@ -34,9 +34,9 @@ The advanced rules take into account the suits.
 - There cannot be any draw between the players as they are not any card duplicates.
 - We use the same system as the standard method to count the points.
 
-
-<img src="../media/example_round.jpg">
-
+<p align="center">
+<img src="../docs/media/example_round.jpg" width="50%">
+</p>
 
 ### 1.3 Notes
 
@@ -50,7 +50,7 @@ The advanced rules take into account the suits.
 
 ## 2. Data
 
-The images of 7 games that were played are given at `train_games`. The data are composed of:
+The images of 7 games that were played are given at `/data/train`. The data are composed of:
    - 7 folder named after the games (game1 to game7).
    - Each game includes 13 ordered images (1st to 13th round).
    - Each game includes a csv file with the ground truth of the game. The first row list the players (P1 to P4) as well as the dealer (D). The following rows represent the rounds (1 to 13). We represent the card played with 2 character as $AB$ where $A \in [0-9, J, Q, K]$ is the rank of the card and $B \in [C, D, H, S]$ is the suit. For example, QS means "(Q)ueen of (S)pade" and 0D means "(0) of (D)iamond". The dealer is represented by the ID of the player (e.g. P1 -> 1).
