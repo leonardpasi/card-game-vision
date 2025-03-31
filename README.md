@@ -10,7 +10,7 @@ This work was completed in **2021** as a graded project for the EPFL Image Analy
 In short, the goal is to predict the outcome of a new unseen card game, given noisy pictures of the rounds of several card games (with handwritten digits) as a training set. One such picture is displayed below. A detailed description of the project and its requirements is given at `\docs\project_requirements.md`
 
 <p align="center">
-<img src="./media/example_round.jpg" width="30%">
+<img src="./data/train/game1/1.jpg" width="30%">
 </p>
 
 
