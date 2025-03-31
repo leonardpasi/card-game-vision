@@ -70,5 +70,17 @@ Players designated as dealer: [3 3 3 4 4 4 1 1 1 2 2 2 2]
 ```
 This means 94% accuracy, all predictions combined (suits, digit/figure, dealer).
 
-## Repository structure
+## Installation
+```conda env create -f environment.yml```
+Check out [mamba](https://mamba.readthedocs.io/en/latest/index.html) though 😉
+
+## Source code structure
+While the structure of the overall repo is self explanatory, the code contained in `\src` is not exactly well organized. Keep in mind that for this academic project, code quality and maintainability was never a priority.
+- `run_predictions.py`: This is the module we run to predict the outcome of the new unseen game. This requires the `generated_samples.npz` to be in `/data/train`. This file is the output of the segmentation stage on the training set. It was not included in this repo as it is a bit too heavy.
+- `segmentation.py`: Segmentation module.
+- `NN.py`: We used this module to train our neural networks (three of them).
+- `training.py`: We used this module to investigate different feature extraction approaches and to perform training of the ML classifiers (based on the Fourier descriptors).
+- `utils.py`: Functions to evaluate the game given the card predictions.
+- `functions.py`: Functions and classes used in the training module and the NN module.
+- `functions_bis.py`: Other functions used exclusively by the module NN.py.
 
