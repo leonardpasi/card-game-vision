@@ -1,0 +1,19 @@
+name: card_game_vision_env
+channels:
+  - https://conda.anaconda.org/gurobi
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - tensorflow=2.5
+  - numpy=1.19.5
+  - scikit-image
+  - ipykernel
+  - matplotlib
+  - scipy
+  - opencv
+  - pandas=1.2.5
+  - ca-certificates
+  - certifi
+  - openssl
+  - black
