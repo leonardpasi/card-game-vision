@@ -5,7 +5,7 @@
 
 ## Overview
 
-This work was completed in **2021** as a graded project for the EPFL Image Analysis and Pattern Recognition course, taught by Prof. Jean-Philippe Thiran. The final grade was **6/6**.
+This work was completed in **2021** as a graded project for the EPFL Image Analysis and Pattern Recognition course, taught by Prof. Jean-Philippe Thiran. The final grade was **5.75/6**.
 
 In short, the goal is to predict the outcome of a new unseen card game, given noisy pictures of the rounds of several card games (with handwritten digits) as a training set. One such picture is displayed below. A detailed description of the project and its requirements is given at `\docs\project_requirements.md`
 
@@ -41,7 +41,34 @@ To properly classify digits, it was important to make use of the MNIST dataset, 
 The idea is to have a single neural network for both figures and digits. The neural network (`/trained_models/modelFD`) was trained on the MNIST dataset and on the segmented training figures set, which was augmented. Although we mimicked the preprocessing of the MNIST data set, achieving a format that looked almost identical to the MNIST, the NN must have learned to pick up on that very small difference in preprocessing. In fact, it has a very good performance on the MNIST testing set (>0.95) and on the figures (=1), but a very bad performance on the segmented digits, which are confused with figures.
 
 ##### Approach 2: Fourier descriptors and gaussian model for the figures (J, Q, K), and a neural network for the digits ✅
-Our final approach is to combine the Fourier descriptors, used to identify the figures, and a Neural Network (model_9527) trained on the MNIST dataset to identify the digits. Hence, classification is performed in two steps: first, the Fourier descriptors are computed, and belonging to a figure class is tested with a Gaussian model. Second, if the sample is not a figure, it is processed by the neural network and classified as a digit.
+Our final approach is to combine the Fourier descriptors, used to identify the figures, and a Neural Network (model_9527) trained on the MNIST dataset to identify the digits. Hence, classification is performed in two steps: first, the Fourier descriptors are computed, and belonging to a figure class is tested with a Gaussian model. The Gaussian model was trained on segmented figures from the training dataset, using the 3rd and 4th descriptors. With these features, there is still some overlap between the queen class and other digits, which explains most of the errors on the final test. Second, if the sample is not a figure, it is processed by the neural network and classified as a digit.
+
+<p align="center">
+<img src="./docs/plots/digits_classification.png" width="60%">
+</p>
+
+#### Final results
+By running the `/src/run_prediction.py` script on the testing dataset at `/data/test`, we get the following predictions:
+```
+The cards played were:
+[
+['9D', 'JD', 'JC', 'KD'], 
+['QC', 'KH', '4D', 'KC'], 
+['3S', '9S', '2S', '1C'], 
+['JS', 'QS', 'KS', 'QS'], 
+['0H', 'QH', '1H', '2H'], 
+['6D', '8D', '5D', '7D'], 
+['6H', '1H', '1H', '7H'], 
+['3D', '1D', '0C', '2D'], 
+['9C', '8C', 'QH', '4C'], 
+['0D', 'QS', 'QS', '6S'], 
+['5H', 'JH', '6C', '4H'], 
+['0S', '7C', '4S', '1S'], 
+['2C', '3C', '5C', 'QD'], 
+]
+Players designated as dealer: [3 3 3 4 4 4 1 1 1 2 2 2 2]
+```
+This means 94% accuracy, all predictions combined (suits, digit/figure, dealer).
 
 ## Repository structure
 
